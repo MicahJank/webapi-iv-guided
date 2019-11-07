@@ -13,7 +13,8 @@ server.use(express.json());
 server.get('/', (req, res) => {
   Shoutouts.find()
   .then(shoutouts => {
-    res.status(200).json(shoutouts);
+    const motd = process.env.MOTD || 'Hello there!';
+    res.status(200).json({message: motd, shoutouts});
   })
   .catch (error => {
     console.error('\nERROR', error);
